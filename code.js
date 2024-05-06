@@ -13,8 +13,7 @@ function isSorted(arr)
     return true;
 }
 
-// Recursive algorithm to generate a new, unique permutation
-// it's called heap's algorithm, I'll try to describe it
+// Heap's algorithm generates a new, unique permutation
 //
 // Base case -> only one element remains in the array : this is a permutation
 //   Check our list of uniques
@@ -58,8 +57,14 @@ function generatePermutation(arr, n, uniquePermutations) {
             return result;
 
         swap(arr, i, n - 1);
+        
+        /*
+        if (n % 2 == 0)
+            swap(arr, i, n - 1);
+        else
+            swap(arr, 0, n - 1);
+        */
     }
-
     return null;
 }
 
