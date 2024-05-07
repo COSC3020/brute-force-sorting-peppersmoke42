@@ -1,3 +1,14 @@
+// ChatGPT was heavily used to create this program
+//   1. It explained heap's algorithm
+//   2. I also had it prove to me why heap's worked
+//   3. I also had it debug for me
+//   4. It also explained how sets work
+//
+// You can ignore the functions factorial and count duplicates
+// as well as the lines commented out of generate and permutation sort.
+// I was trying to attempt an implementation without the set, but I don't
+// really have the time.
+
 function swap(arr, i, j)
 {
     let temp = arr[i];
@@ -41,14 +52,14 @@ function isSorted(arr)
 // n - how much of the array are we permuting
 // uniquePermutations - a set of arrays representing every unique permutation made so far
 function generatePermutation(arr, n, uniquePermutations) {
-    if (n === 1) {
-        
+    if (n === 1) {     
         const key = arr.join()
         if (!uniquePermutations.has(key)) {
             uniquePermutations.add(key);
             return arr;
         }
         return null;
+        
     }
 
     for (let i = 0; i < n; i++) {
@@ -67,7 +78,6 @@ function generatePermutation(arr, n, uniquePermutations) {
     }
     return null;
 }
-
 
 // If the array has less than two values, it's sorted on the first permutation
 //     return 1 in this case
@@ -92,5 +102,29 @@ function permutationSort(arr)
         if(permutation != null && isSorted(permutation))
             break;
     }
+    //return count - countDuplicatePermutations(arr);
     return count;
+}
+
+function factorial(n)
+{
+    let result = 1;
+    for (let i = 2; i <= n; i++)
+        result *= i;
+    return result;
+}
+
+function countDuplicatePermutations(arr)
+{
+    const counts = {};
+    arr.forEach(item => {
+        counts[item] = (counts[item] || 0) + 1;
+    }); 
+
+    let duplicates = 1;
+    for (const count of Object.values(counts)) {
+        duplicates *= factorial(count);
+    }
+
+    return factorial(arr.length) / duplicates;
 }
